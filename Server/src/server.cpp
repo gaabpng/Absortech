@@ -1,63 +1,45 @@
 #include <WiFi.h>
-#include <WiFiClient.h>
-#include <WiFiAP.h>
+#include <esp_now.h>
 
-const char *ssid = "ESP32_AP";
-const char *password = "12345678";
+// Estrutura para receber dados
+typedef struct struct_message {
+  int buttonState;
+} struct_message;
 
-WiFiServer server(80);
+struct_message message;
 
-void setup()
-{
-  Serial.begin(115200);
-  Serial.println();
-  Serial.println("Configuring access point...");
-
-  WiFi.softAP(ssid, password);
-  IPAddress IP = WiFi.softAPIP();
-  Serial.print("AP IP address: ");
-  Serial.println(IP);
-
-  server.begin();
+void OnDataRecv(const uint8_t *mac_addr, const uint8_t *incomingData, int len) {
+  memcpy(&message, incomingData, sizeof(message));
+  Serial.print("Estado do botão recebido: ");
+  Serial.println(message.buttonState);
 }
 
-void loop()
-{
-  WiFiClient client = server.available();
-  if (client)
-  {
-    Serial.println("New Client.");
-    String currentLine = "";
-    while (client.connected())
-    {
-      if (client.available())
-      {
-        char c = client.read();
-        Serial.write(c);
-        if (c == '\n')
-        {
-          if (currentLine.length() == 0)
-          {
-            break;
-          }
-          else
-          {
-            if (currentLine.startsWith("GET /"))
-            {
-              int pinValue = currentLine.substring(5, 6).toInt();
-              Serial.print("Pin value received: ");
-              Serial.println(pinValue);
-            }
-            currentLine = "";
-          }
-        }
-        else if (c != '\r')
-        {
-          currentLine += c;
-        }
-      }
-    }
-    client.stop();
-    Serial.println("Client Disconnected.");
+void setup() {
+  // Inicializa a comunicação serial
+  Serial.begin(115200);
+
+  // Inicializa o ESP-NOW
+  if (esp_now_init() != ESP_OK) {
+    Serial.println("Erro ao inicializar o ESP-NOW");
+    return;
   }
+
+  // Define a função de callback para o recebimento de dados
+  esp_now_register_recv_cb(OnDataRecv);
+
+  // Configura o ESP-NOW para operar no canal atual
+  esp_now_peer_info_t peerInfo;
+  memset(&peerInfo, 0, sizeof(peerInfo));
+  peerInfo.channel = 0; // Canal 0 para o canal atual
+  peerInfo.encrypt = false;
+
+  if (esp_now_add_peer(&peerInfo) != ESP_OK) {
+    Serial.println("Falha ao adicionar o peer");
+    return;
+  }
+}
+
+void loop() {
+  // O código principal não precisa fazer nada
+  // A função de callback OnDataRecv será chamada quando um dado for recebido
 }

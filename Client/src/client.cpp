@@ -1,47 +1,68 @@
 #include <WiFi.h>
-#include <HTTPClient.h>
+#include <esp_now.h>
 
-const char *ssid = "ESP32_AP";
-const char *password = "12345678";
-const char *serverName = "http://192.168.4.1/";
+// Endereço MAC do receptor
+const uint8_t receiverMAC[] = { 0x24, 0x6F, 0x28, 0xAB, 0xCD, 0xEF }; // Substitua pelo MAC do receptor
 
-const int pin = 2;
+// Configuração do botão
+const int buttonPin = 0; // Ajuste conforme necessário
+int buttonState = 0;
 
-void setup()
-{
-  Serial.begin(115200);
-  pinMode(pin, INPUT);
+// Estrutura para enviar dados
+typedef struct struct_message {
+  int buttonState;
+} struct_message;
 
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(1000);
-    Serial.println("Connecting to WiFi...");
-  }
-  Serial.println("Connected to WiFi");
+struct_message message;
 
-  delay(2000);
+void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+  Serial.print("Status de envio: ");
+  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Sucesso" : "Falha");
 }
 
-void loop()
-{
-  if (WiFi.status() == WL_CONNECTED)
-  {
-    HTTPClient http;
-    http.begin(serverName + String(digitalRead(pin)));
-    int httpResponseCode = http.GET();
-    if (httpResponseCode > 0)
-    {
-      String response = http.getString();
-      Serial.println(httpResponseCode);
-      Serial.println(response);
-    }
-    else
-    {
-      Serial.print("Error on sending GET: ");
-      Serial.println(httpResponseCode);
-    }
-    http.end();
+void setup() {
+  // Inicializa a comunicação serial
+  Serial.begin(115200);
+
+  // Configura o pino do botão
+  pinMode(buttonPin, INPUT);
+
+  // Inicializa o ESP-NOW
+  if (esp_now_init() != ESP_OK) {
+    Serial.println("Erro ao inicializar o ESP-NOW");
+    return;
   }
-  delay(2000); // Envia a cada 2 segundos
+
+  // Define a função de callback para o envio de dados
+  esp_now_register_send_cb(OnDataSent);
+
+  // Adiciona o receptor
+  esp_now_peer_info_t peerInfo;
+  memcpy(peerInfo.peer_addr, receiverMAC, 6);
+  peerInfo.channel = 0; // Canal 0 para o canal atual
+  peerInfo.encrypt = false;
+
+  if (esp_now_add_peer(&peerInfo) != ESP_OK) {
+    Serial.println("Falha ao adicionar o peer");
+    return;
+  }
+}
+
+void loop() {
+  // Lê o estado do botão
+  buttonState = digitalRead(buttonPin);
+  
+  // Preenche a estrutura com o estado do botão
+  message.buttonState = buttonState;
+
+  // Envia a estrutura para o receptor
+  esp_err_t result = esp_now_send(receiverMAC, (uint8_t *)&message, sizeof(message));
+
+  if (result == ESP_OK) {
+    Serial.println("Enviado com sucesso");
+  } else {
+    Serial.println("Falha ao enviar");
+  }
+
+  delay(1000); // Espera 1 segundo antes de enviar novamente
 }

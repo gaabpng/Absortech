@@ -1,12 +1,20 @@
-#include <Arduino.h>
+#include <WiFi.h>
+
 void setup() {
-  // Inicializa a comunicação serial com a taxa de transmissão de 9600 bps
-  Serial.begin(9600);
+  // Inicializa a comunicação serial
+  Serial.begin(115200);
+  
+  // Aguarda a inicialização do monitor serial
+  while (!Serial) {
+    delay(100);
+  }
+  
+  // Obtém e exibe o endereço MAC do ESP32
+  String macAddress = WiFi.macAddress();
+  Serial.println("Endereço MAC do ESP32:");
+  Serial.println(macAddress);
 }
 
 void loop() {
-  static int contador = 0; // Variável estática para manter o valor da contagem entre iterações do loop
-  Serial.println(contador); // Imprime o valor da contagem no monitor serial
-  contador++; // Incrementa a contagem
-  delay(3000); // Aguarda 3 segundos
+  // Não há necessidade de código no loop para esta tarefa
 }
