@@ -1,3 +1,5 @@
 .pio
 .vscode
 /AmbienteVirtual/Lib/site-packages
+django-admin.exe
+sqlformat.exe
