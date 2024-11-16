@@ -1,2 +1,70 @@
-.pio
-.vscode
+# Byte-compiled files
+*.pyc
+*.pyo
+__pycache__/
+
+# Logs
+*.log
+
+# Virtual environment
+venv/
+.env/
+env/
+ENV/
+
+# Database
+*.sqlite3
+
+# Static files generated (collected by collectstatic)
+staticfiles/
+static/
+
+# Media files (uploads, etc.)
+media/
+
+# Django secret key and environment variables
+.env
+
+# Pytest cache
+.pytest_cache/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# pip and virtual environment metadata
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Coverage reports
+htmlcov/
+*.cover
+*.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+
+# MyPy cache
+.mypy_cache/
+
+# Python egg metadata
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Node.js modules (if using npm/yarn for frontend)
+node_modules/
+
+# Generated migrations
+migrations/*
+
+# Ignore all migrations except __init__.py
+!migrations/__init__.py
