@@ -1,3 +1,5 @@
+# ESSE CÓDIGO DEPOIS DE CORRIGIDO SERÁ MESCLADO COM O DE ADICIONAR A INFORMAÇÃO NO BANCO DE DADOS
+
 while True:
     import paho.mqtt.client as mqtt
 
