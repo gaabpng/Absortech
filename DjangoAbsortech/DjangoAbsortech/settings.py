@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'AbsortechDB',
         'USER': 'usuario',
         'PASSWORD': 'IEEE-access',
-        'HOST': '172.31.3.2',
+        'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
         'charset': 'utf8mb4',
