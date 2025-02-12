@@ -2,6 +2,11 @@
 #include <PubSubClient.h>
 #include <Ultrasonic.h>
 
+#define MINUTES_TO_SLEEP  10
+#define uS_TO_MINUTE_FACTOR 60000000
+#define uS_TO_SECOND_FACTOR 1000000
+#define ANDAR 1
+
 // Configurações de Wi-Fi
 const char* ssid = "nomeWifi";
 const char* password = "SenhaWifi";
@@ -14,9 +19,6 @@ const char* mqtt_topic = "SENSOR/ULTRASSOM";
 // Criação dos objetos WiFi e MQTT
 WiFiClient espClient;
 PubSubClient client(espClient);
-
-// Variável que será incrementada
-int count = 0;
 
 //Define os pinos para o trigger e echo
 #define pino_trigger 23
@@ -70,6 +72,8 @@ void setup() {
   client.setCallback(callback);
 }
 
+StaticJsonDocument<128> doc;
+
 void loop() {
   if (!client.connected()) {
     reconnect();
@@ -81,15 +85,23 @@ void loop() {
   float cmMsec;
   long microsec = ultrasonic.timing();
   cmMsec = ultrasonic.convert(microsec, Ultrasonic::CM);
+
   //Exibe informacoes no serial monitor
   Serial.print("Distancia em cm: ");
   Serial.print(cmMsec   );
 
-  // Publica o número incrementado a cada 3 segundos
-  String message = String(cmMsec);
-  Serial.print("Publicando: ");
-  Serial.println(message);
-  client.publish(mqtt_topic, message.c_str());
+  doc["measure"] = cmMsec;
+  doc["andar"] = ANDAR;
 
-  delay(3000); // Espera 3 segundos antes de publicar o próximo valor
+  String jsonOutput;
+  serializeJson(doc, jsonOutput);
+
+  Serial.print("Publicando: ");
+  Serial.println(jsonOutput);
+
+  client.publish(mqtt_topic, jsonOutput);
+
+  // COLOCA O ESP32 PARA ESPERAR (MODO DE ECONOMIA) PELA QUANTIDADE DE MINUTOS ESPECIFICADA
+  esp_sleep_enable_timer_wakeup(MINUTES_TO_SLEEP * uS_TO_MINUTE_FACTOR);
+  esp_deep_sleep_start();
 }
