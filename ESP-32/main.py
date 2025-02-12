@@ -15,7 +15,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.settings')
 django.setup()
 
 from django.utils import timezone
-from DjangoAbsortech.app.models import LeituraSensor
+from app.models import LeituraSensor
 
 # Função chamada quando uma mensagem é recebida
 def on_message(client, userdata, msg):
