@@ -1,8 +1,12 @@
 # ESSE CÓDIGO DEPOIS DE CORRIGIDO SERÁ MESCLADO COM O DE ADICIONAR A INFORMAÇÃO NO BANCO DE DADOS
 import paho.mqtt.client as mqtt
 import json
+import sys
 import os
 import django
+
+# Adicionar o caminho do diretório DjangoAbsortech ao sys.path
+sys.path.append('/home/ubuntu/Absortech/DjangoAbsortech')
 
 # Configuração do Django para encontrar o projeto
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.DjangoAbsortech.settings')
