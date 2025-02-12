@@ -6,7 +6,9 @@ import os
 import django
 
 # Adicionar o caminho do diretório DjangoAbsortech ao sys.path
-sys.path.append('/home/ubuntu/Absortech/DjangoAbsortech')
+sys.path.append('/home/ubuntu/Absortech')
+
+print(sys.path)
 
 # Configuração do Django para encontrar o projeto
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.DjangoAbsortech.settings')
