@@ -1,17 +1,27 @@
 # ESSE CÓDIGO DEPOIS DE CORRIGIDO SERÁ MESCLADO COM O DE ADICIONAR A INFORMAÇÃO NO BANCO DE DADOS
+import paho.mqtt.client as mqtt
+import json
 
-while True:
-    import paho.mqtt.client as mqtt
+#while True:
 
-    # Variável global para armazenar o valor do tópico
-    topic_value = None
 
-    # Função chamada quando uma mensagem é recebida
-    def on_message(client, userdata, msg):
-        global topic_value
-        topic_value = msg.payload.decode()  # Salva o valor na variável
-        print(f"Valor recebido: {topic_value}")
+# Função chamada quando uma mensagem é recebida
+def on_message(client, userdata, msg):
+    #global topic_value
 
+    #BLOCO PARA TARTAR ERROS ORIUNDOS DO JSON
+    try:
+        # DECODIFICANDO OS DADOS VINDOS DO JSON
+        payload = json.loads(msg.payload.decode())
+        measure = payload["measure"]
+        andar = payload["andar"]
+
+        print(f"Andar: {andar} - Valor recebido: {measure}")
+    except json.JSONDecodeError as erro:
+        print("Mensagem JSON Inválida!", erro)
+
+#LÓGICA PRINCIPAL DO PROGRAMA
+def main():
     # Configurações do cliente MQTT
     client = mqtt.Client()
 
@@ -25,10 +35,14 @@ while True:
     client.subscribe("SENSOR/ULTRASSOM")
 
     # Inicie o loop para receber as mensagens
-    client.loop_start()
+    #client.loop_start()
 
-    # Aguarde até que uma mensagem seja recebida e a variável seja preenchida
-    while topic_value is None:
-        pass  # Fica em loop até que o valor do tópico seja recebido
+    # FUNÇÃO MQTT PARA FICAR CONTINUAMENTE ESCUTANDO MENSAGENS, TRATA RECONEXÃO CASO NECESSÁRIO
+    client.loop_forever()
 
-    print(f"Valor final do tópico: {topic_value}")
+    # É REALMENTE NECESSÁRIO TER ESSE PRINT AQUI ?
+    #print(f"Valor final do tópico: {topic_value}")
+
+# INICIALIZAÇÃO
+if __name__ == "__main__":
+    main()
