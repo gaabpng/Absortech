@@ -5,7 +5,7 @@ import os
 import django
 
 # Configuração do Django para encontrar o projeto
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.DjangoAbsortech.settings')
 django.setup()
 
 from django.utils import timezone
