@@ -72,6 +72,7 @@ void setup() {
   client.setCallback(callback);
 }
 
+// INICIALIZANDO UM OBJETO JSON
 StaticJsonDocument<128> doc;
 
 void loop() {
@@ -90,15 +91,19 @@ void loop() {
   Serial.print("Distancia em cm: ");
   Serial.print(cmMsec   );
 
+  // GUARDA AS INFORMAÇÕES NO OBJETO JSON
   doc["measure"] = cmMsec;
   doc["andar"] = ANDAR;
 
+  // TRANSFORMA O OBJETO JSON EM UMA STRING PARA SER ENVIADA
   String jsonOutput;
   serializeJson(doc, jsonOutput);
 
+  // PUBLICA OS DADOS DO SENSOR
   Serial.print("Publicando: ");
   Serial.println(jsonOutput);
 
+  // PUBLICA OS DADOS DO SENSOR
   client.publish(mqtt_topic, jsonOutput);
 
   // COLOCA O ESP32 PARA ESPERAR (MODO DE ECONOMIA) PELA QUANTIDADE DE MINUTOS ESPECIFICADA
