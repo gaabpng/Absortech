@@ -6,12 +6,12 @@ import os
 import django
 
 # Adicionar o caminho do diretório DjangoAbsortech ao sys.path
-sys.path.append('/home/ubuntu/Absortech')
+sys.path.append('/home/ubuntu/Absortech/DjangoAbsortech')
 
 print(sys.path)
 
 # Configuração do Django para encontrar o projeto
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.DjangoAbsortech.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.settings')
 django.setup()
 
 from django.utils import timezone
