@@ -1,6 +1,7 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include <Ultrasonic.h>
+#include <ArduinoJson.h>
 
 #define MINUTES_TO_SLEEP  10
 #define uS_TO_MINUTE_FACTOR 60000000
@@ -104,7 +105,7 @@ void loop() {
   Serial.println(jsonOutput);
 
   // PUBLICA OS DADOS DO SENSOR
-  client.publish(mqtt_topic, jsonOutput);
+  client.publish(mqtt_topic, jsonOutput.c_str());
 
   // COLOCA O ESP32 PARA ESPERAR (MODO DE ECONOMIA) PELA QUANTIDADE DE MINUTOS ESPECIFICADA
   esp_sleep_enable_timer_wakeup(MINUTES_TO_SLEEP * uS_TO_MINUTE_FACTOR);
