@@ -1,22 +1,32 @@
 # ESSE CÓDIGO DEPOIS DE CORRIGIDO SERÁ MESCLADO COM O DE ADICIONAR A INFORMAÇÃO NO BANCO DE DADOS
 import paho.mqtt.client as mqtt
 import json
-
-#while True:
-
+from django.utils import timezone
+from DjangoAbsortech.app.models import LeituraSensor
 
 # Função chamada quando uma mensagem é recebida
 def on_message(client, userdata, msg):
-    #global topic_value
-
-    #BLOCO PARA TARTAR ERROS ORIUNDOS DO JSON
+    
+    #BLOCO PARA TRATAR ERROS ORIUNDOS DO JSON
     try:
+        agora = timezone.now()
         # DECODIFICANDO OS DADOS VINDOS DO JSON
         payload = json.loads(msg.payload.decode())
         measure = payload["measure"]
-        andar = payload["andar"]
+        _andar = payload["andar"]
 
-        print(f"Andar: {andar} - Valor recebido: {measure}")
+        # CRIANDO OBJETO COM DADOS DO JSON
+        leitura = LeituraSensor(
+            data = agora.date(),
+            hora = agora.time(),
+            andar = _andar,
+            valor_leitura = measure
+        )
+
+        #SALVANDO
+        leitura.save()
+
+        print(f"Andar: {_andar} - Valor recebido: {measure}")
     except json.JSONDecodeError as erro:
         print("Mensagem JSON Inválida!", erro)
 
