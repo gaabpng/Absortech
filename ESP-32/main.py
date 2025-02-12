@@ -1,6 +1,13 @@
 # ESSE CÓDIGO DEPOIS DE CORRIGIDO SERÁ MESCLADO COM O DE ADICIONAR A INFORMAÇÃO NO BANCO DE DADOS
 import paho.mqtt.client as mqtt
 import json
+import os
+import django
+
+# Configuração do Django para encontrar o projeto
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.settings')
+django.setup()
+
 from django.utils import timezone
 from DjangoAbsortech.app.models import LeituraSensor
 
