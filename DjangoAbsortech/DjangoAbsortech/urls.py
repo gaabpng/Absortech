@@ -17,9 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app import views
-from app.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',home, views.home)
+    path('', views.home, name='home'),  # Ajustando a chamada correta da função
 ]
