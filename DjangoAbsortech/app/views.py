@@ -9,4 +9,4 @@ def home(request):
         data__in=[item['last_entry'] for item in subquery]
     ).order_by('andar', '-hora')
 
-    return render(request, 'seu_template.html', {'leituras': leituras_recentes})
+    return render(request, 'index.html', {'leituras': leituras_recentes})
