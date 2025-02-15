@@ -1,6 +1,6 @@
 from django.db.models import Max
 from django.shortcuts import render
-from .models import Leiturasensor
+from .models import LeituraSensor
 
 def home(request):
     # Obtém a leitura mais recente de cada andar
