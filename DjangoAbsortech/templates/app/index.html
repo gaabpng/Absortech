@@ -26,6 +26,31 @@
         <h1>ABSORTECH</h1>
         <h2>Discrição e Dignididade</h2>
 
+        <table>
+            <thead>
+                <tr>
+                    <th>Andar</th>
+                    <th>Data</th>
+                    <th>Hora</th>
+                    <th>Valor Leitura</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for leitura in leituras %}
+                <tr>
+                    <td>{{ leitura.andar }}</td>
+                    <td>{{ leitura.data }}</td>
+                    <td>{{ leitura.hora }}</td>
+                    <td>{{ leitura.valor_leitura }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">Nenhum dado disponível.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
     </main>
     
     
