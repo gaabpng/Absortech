@@ -1,14 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Página</title>
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style_page.css"> -->
     {% load static %}
     <!-- Adicionando o CSS -->
-    <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
-</head>
+    <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}"></head>
 <body>
-    <h1>Bem-vindo à minha página!</h1>
+    
+    <header>
+
+        <h3>ABSORTECH</h3>
+        <nav>
+            <a href="#">Instagram do Ramo IEEE UFF</a>
+            <a href="#">Instagram da CS&EPS</a>
+        </nav>
+        
+    </header>
+    
+    
+    <main>
+
+        <h1>ABSORTECH</h1>
+        <h2>Discrição e Dignididade</h2>
+
+    </main>
+    
+    
+    <footer>
+        <p>Redes sociais</p>
+    </footer>
+
+    <!-- <script src="script_page.js"></script> -->
+    <script src="{% static 'js/index.js' %}"></script>
+
 </body>
 </html>
