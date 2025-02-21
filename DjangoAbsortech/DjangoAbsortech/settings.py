@@ -77,15 +77,11 @@ WSGI_APPLICATION = 'DjangoAbsortech.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'AbsortechDB',
-        'USER': 'usuario',
-        'PASSWORD': 'IEEE-access',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-        'charset': 'utf8mb4',
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
+        'NAME': 'absortechdb',  # Nome do seu banco de dados
+        'USER': 'root',           # Usuário do MySQL (padrão no XAMPP)
+        'PASSWORD': 'admin',           # Senha do usuário (deixe em branco se não houver senha no XAMPP)
+        'HOST': '127.0.0.1',      # Endereço do banco de dados (localhost)
+        'PORT': '3306',           # Porta padrão do MySQL
     }
 }
 
