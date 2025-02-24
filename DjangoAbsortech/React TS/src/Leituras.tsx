@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const Leituras = () => {
-  const [leituras, setLeituras] = useState([]);
+// Definição da interface para a estrutura dos dados
+interface Leitura {
+  andar: string;
+  data: string;
+  hora: string;
+  valor_leitura: number;
+}
+
+const Leituras: React.FC = () => {
+  const [leituras, setLeituras] = useState<Leitura[]>([]);
 
   useEffect(() => {
     const fetchData = () => {
-      axios.get("http://localhost:8000/api/leituras/")
+      axios.get<Leitura[]>("http://localhost:8000/api/leituras/")
         .then(response => {
           setLeituras(response.data);
         })
@@ -46,7 +54,7 @@ const Leituras = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="4">Nenhum dado disponível.</td>
+              <td colSpan={4}>Nenhum dado disponível.</td>
             </tr>
           )}
         </tbody>

@@ -1,11 +1,12 @@
+import React from "react";
 import Leituras from "./Leituras";
 
-function App() {
+const App: React.FC = () => {
   return (
     <div>
       <Leituras />
     </div>
   );
-}
+};
 
 export default App;
