@@ -20,5 +20,5 @@ from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),  # Ajustando a chamada correta da função
+    path('api/leituras/', views.obter_leituras, name='obter_leituras'),
 ]
