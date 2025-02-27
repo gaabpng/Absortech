@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['labrador-lucky-factually.ngrok-free.app', '127.0.0.1']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +49,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True 
 
 ROOT_URLCONF = 'DjangoAbsortech.urls'
 
