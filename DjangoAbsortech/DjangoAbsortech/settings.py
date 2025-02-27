@@ -25,8 +25,7 @@ SECRET_KEY = 'django-insecure-a@_swbrr3m0bsu(iux@n-f8kp)+!jwvmfom3v*z%f!*0)qe!*(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['labrador-lucky-factually.ngrok-free.app', '127.0.0.1']
 
 # Application definition
 
@@ -82,11 +81,15 @@ WSGI_APPLICATION = 'DjangoAbsortech.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'absortechdb',  # Nome do seu banco de dados
-        'USER': 'root',           # Usuário do MySQL (padrão no XAMPP)
-        'PASSWORD': 'admin',           # Senha do usuário (deixe em branco se não houver senha no XAMPP)
-        'HOST': '127.0.0.1',      # Endereço do banco de dados (localhost)
-        'PORT': '3306',           # Porta padrão do MySQL
+        'NAME': 'AbsortechDB',
+        'USER': 'usuario',
+        'PASSWORD': 'IEEE-access',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+        'charset': 'utf8mb4',
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
