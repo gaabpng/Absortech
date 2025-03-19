@@ -2,7 +2,8 @@
 
 <div align="center">
 
-<img src="Absortech.svg" width="300">
+<img src="https://github.com/user-attachments/assets/713fc918-6b07-437f-9094-8bcc0bb4d03e" width="300">
+
 
   <p align="center">
     <strong>Dignity and discretion.</strong>
@@ -66,7 +67,8 @@ pip install -r requirements.txt
 
 The imagem below provides an overview of how Absortech works 
 
-![alt text](image.png)
+![image](https://github.com/user-attachments/assets/809595d4-08e9-43c8-aa3e-edba56d2ad97)
+
 
 ## Build your own
 In order to replicate this yourself, make sure you have an ESP32 and the HC-SR04 sensor and follow this schematic:
