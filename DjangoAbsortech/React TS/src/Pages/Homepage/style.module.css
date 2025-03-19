@@ -1,0 +1,9 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    
+    /* NOTA: o asterisco serve para indicar que as estilizações aqui dentro serão atribuídas a TODOS os elementos. */
+    /* Costuma-se colocar justo esses 3 de base sempre */
+}
+.container {}
