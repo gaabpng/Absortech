@@ -1,20 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 * {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
 }
-.header {}
-.buttonHomepage {}
-.title1 {}
-.title2 {}
-.main {}
-.title3 {}
-.statusDiv {}
-.footer {}
-.iframeMap {}
-.infoDiv {}
-.textDiv {}
-.text {}
-.linkDiv {}
-.linkCSEPS {}
-.linkRamoUFF {}
+.header {
+    background-color: #673998;
+    color: #d6c4eb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+    padding: 20px;
+}
+.buttonHomepage {
+    height: 86px;
+    background-color: #673998;
+    color: #d6c4eb;
+    border-radius: 12px;
+    border: none;
+    font-size: 70px;
+    font-weight: bolder;
+    font-family: "Montserrat", Arial, Helvetica, sans-serif;
+    text-shadow: #430A81 10px 5px 6px;
+    transition: 0.2s ease-in-out;
+    
+    &:hover {
+        color: #9e7ac4;
+        transform: scale(1.1);
+    }
+}
+.title1 {
+    width: 305px;
+    height: 86px;
+    font-size: 70px;
+    font-weight: 200;
+    font-family:  "Inter", Arial, Helvetica, sans-serif;
+    text-shadow: #430A81 10px 5px 6px;
+}
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to bottom, #7F51B0 0%, #430A81 60%);
+    min-height: 58vh;
+    min-width: fit-content;
+    color: #e7d8f8;
+    font-family: "Big shoulders display", Arial, Helvetica, sans-serif;
+    padding-top: 80px;
+    gap: 50px;
+}
+.title2 {
+    font-weight: bolder;
+    font-size: 80px;
+    letter-spacing: 3px;
+    text-shadow: #430A81 5px 3px 3px;
+}
+.statusDiv {
+    display: flex;
+    gap: 30px;
+    padding-bottom: 100px;
+}
+.footer {
+    background-color: #673998;
+    display: flex;
+    color: #FFFFFF;
+    padding: 40px 60px 40px 150px;
+}
+.iframeMap {
+    border: solid 7px #8a6aaf;
+    border-radius: 20px;
+    box-shadow: 6px 6px 5px rgba(67, 10, 129, 0.5);
+}
+.infoDiv {
+    display: flex;
+    align-items: center;
+    gap: 350px;
+}
+.textDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.text {
+    padding-left: 30px;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+}
+.linkDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: baseline;
+    gap: 20px;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 35px;
+}
+.link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #FFFFFF;
+    gap: 20px;
+    transition: 0.2s ease-in-out;
+    
+    &:hover {
+        color: #9e7ac4;
+    }
+}
+.image {
+    width: 50px;
+}
