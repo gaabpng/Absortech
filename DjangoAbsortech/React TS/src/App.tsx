@@ -1,12 +1,6 @@
-import React from "react";
-import Leituras from "./Leituras";
+import { RouterProvider } from "react-router-dom";
+import router from "./router";
 
-const App: React.FC = () => {
-  return (
-    <div>
-      <Leituras />
-    </div>
-  );
-};
-
-export default App;
+export default function Main() {
+	return <RouterProvider router={router} />;
+}

@@ -1,0 +1,42 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    font-weight: bolder;
+    width: 700px;
+    gap: 20px;
+}
+.text1 {
+    font-size: 60px;
+    width: fit-content;
+}
+.statusDiv {
+    display: flex;
+    justify-content: space-between;
+}
+.text2 {
+    font-size: 40px;
+    padding-left: 50px;
+    align-self: center;
+}
+.redSignal {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background-color: rgb(233, 39, 39);
+    border: rgb(136, 27, 27) solid 4px;
+    box-shadow: 5px 5px 10px #290850;
+}
+.greenSignal {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background-color: #36E94B;
+    border: #218f2e solid 4px;
+    box-shadow: 5px 5px 10px #290850;
+}
