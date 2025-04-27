@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
 
   server: {
-    allowedHosts: ['frontend_web'],
+    allowedHosts: ['labrador-lucky-factually.ngrok-free.app'],
   }
 })
