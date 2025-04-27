@@ -15,7 +15,7 @@ const Leituras: React.FC = () => {
 	useEffect(() => {
 		const fetchData = () => {
 			axios
-				.get<Leitura[]>("http://localhost:8000/api/leituras/")
+				.get<Leitura[]>("http://127.0.0.1:8000/api/leituras/")
 				.then((response) => {
 					setLeituras(response.data);
 				})
