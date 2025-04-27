@@ -15,21 +15,15 @@ const Leituras: React.FC = () => {
 	useEffect(() => {
 		const fetchData = () => {
 			axios
-				.get<Leitura[]>("http://127.0.0.1:8000/api/leituras/")
-				.then((response) => {
-					setLeituras(response.data);
-				})
-				.catch((error) => {
-					console.error("Erro ao buscar leituras:", error);
-					if (error.response) {
-						console.log("Resposta de erro:", error.response.data);
-						console.log("Status de erro:", error.response.status);
-					} else if (error.request) {
-						console.log("A requisição foi feita, mas não houve resposta.");
-					} else {
-						console.log("Erro em configurar a requisição:", error.message);
-					}
-				});
+			axios
+			.get<Leitura[]>("/api/leituras/")
+			.then((response) => {
+			  setLeituras(response.data);
+			})
+			.catch((error) => {
+			  console.error("Erro ao buscar leituras:", error);
+			});
+		  
 		};
 
 		fetchData(); // Busca os dados imediatamente ao carregar a página
