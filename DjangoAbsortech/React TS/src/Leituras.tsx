@@ -21,6 +21,14 @@ const Leituras: React.FC = () => {
 				})
 				.catch((error) => {
 					console.error("Erro ao buscar leituras:", error);
+					if (error.response) {
+						console.log("Resposta de erro:", error.response.data);
+						console.log("Status de erro:", error.response.status);
+					} else if (error.request) {
+						console.log("A requisição foi feita, mas não houve resposta.");
+					} else {
+						console.log("Erro em configurar a requisição:", error.message);
+					}
 				});
 		};
 
