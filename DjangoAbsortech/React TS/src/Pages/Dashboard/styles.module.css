@@ -20,7 +20,6 @@
     height: 86px;
     background-color: #673998;
     color: #d6c4eb;
-    border-radius: 12px;
     border: none;
     font-size: 70px;
     font-weight: bolder;
@@ -29,6 +28,7 @@
     transition: 0.2s ease-in-out;
     
     &:hover {
+        cursor: pointer;
         color: #9e7ac4;
         transform: scale(1.1);
     }
