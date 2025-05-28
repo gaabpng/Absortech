@@ -1,9 +1,133 @@
-* {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-    
-    /* NOTA: o asterisco serve para indicar que as estilizações aqui dentro serão atribuídas a TODOS os elementos. */
-    /* Costuma-se colocar justo esses 3 de base sempre */
+
+.pageContainer {
+  background-color: #4a148c;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif; 
+  min-height: 100vh; 
+  padding-bottom: 50px;
 }
-.container {}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+
+.logo {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.menuIcon {
+  cursor: pointer;
+}
+
+.menuLine {
+  width: 30px;
+  height: 3px;
+  background-color: #ffffff;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+
+.heroSection {
+  position: relative;
+  height: 400px;
+  background-image: url('Não achei a Imagem');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+
+.heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+}
+
+.heroContent h1 {
+  font-size: 5em;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.heroContent p {
+  font-size: 1.5em; 
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+
+.contentSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 10%;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.yellowBox {
+  width: 250px;
+  height: 180px; 
+  background-color: #fdd835;
+  border: 5px solid #fbc02d; 
+  border-radius: 25px; 
+  flex-shrink: 0; 
+}
+
+.textContent {
+  flex-grow: 1;
+  max-width: 500px; 
+}
+
+.textContent h2 {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+.textContent p {
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+
+.containerSection {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 768px) {
+  .contentSection {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .heroContent h1 {
+    font-size: 3.5em;
+  }
+
+  .heroContent p {
+    font-size: 1.2em;
+  }
+
+  .header {
+      padding: 15px 20px;
+  }
+}
