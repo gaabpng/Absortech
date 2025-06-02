@@ -1,57 +1,52 @@
-import React from 'react';
-import styles from './style.module.css';
+import React from "react";
+import "./style.module.css";
 
-const WebPage = () => {
-  return (
-    <div className={styles.pageContainer}>
-      {/* Cabeçalho */}
-      <header className={styles.header}>
-        <div className={styles.logo}>CS & EPS</div>
-        <div className={styles.menuIcon}>
-          <div className={styles.menuLine}></div>
-          <div className={styles.menuLine}></div>
-          <div className={styles.menuLine}></div>
-        </div>
-      </header>
+const Homepage: React.FC = () => (
+  <>
+    <header>
+      <div className="container">
+        <div className="logo">CS & EPS</div>
+        <nav className="menu-icon">
+          <div></div>
+          <div></div>
+          <div></div>
+        </nav>
+      </div>
+    </header>
 
-      {/* Seção Hero */}
-      <section className={styles.heroSection}>
-        <div className={styles.heroOverlay}></div> {/* Camada para escurecer a imagem se necessário */}
-        <div className={styles.heroContent}>
+    <main>
+      <section className="hero">
+        <div className="hero-content">
           <h1>ABSORTECH</h1>
           <p>DIGNIDADE E DISCRIÇÃO</p>
         </div>
       </section>
 
-      {/* Seção Metas */}
-      <section className={`${styles.contentSection} ${styles.metasSection}`}>
-        <div className={styles.yellowBox}></div>
-        <div className={styles.textContent}>
-          <h2>Metas e nossos 4 “idade”</h2>
-          <p>
-            Um produto simples, prático, responsivo e escalável. Prático pela fácil instalação e baixa
-            manutenção. Simples pelo visual limpo e elegante. Responsivo pela tecnologia
-            eficiente. Escalável pelo uso de um sistema de comunicação otimizado e rápido entre
-            contêineres.
-          </p>
+      <section className="info-section purple-bg">
+        <div className="container content-flex">
+          <div className="placeholder-box"></div>
+          <div className="text-content">
+            <h2>Metas e nossos 4 “idade”</h2>
+            <p>
+              Um produto simples, prático, responsivo e escalável. Prático pela fácil instalação e baixa manutenção. Simples pelo visual limpo e elegante. Responsivo pela tecnologia eficiente. Escalável pelo uso de um sistema de comunicação otimizado e rápido entre contêineres.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Seção Contêiner */}
-      <section className={`${styles.contentSection} ${styles.containerSection}`}>
-        <div className={styles.textContent}>
-          <h2>Conteiner Autômato</h2>
-          <p>
-            Um produto simples, prático, responsivo e escalável. Prático pela fácil instalação e baixa
-            manutenção. Simples pelo visual limpo e elegante. Responsivo pela tecnologia
-            eficiente. Escalável pelo uso de um sistema de comunicação otimizado e rápido entre
-            contêineres.
-          </p>
+      <section className="info-section purple-bg">
+        <div className="container content-flex reverse">
+          <div className="placeholder-box"></div>
+          <div className="text-content">
+            <h2>Contêiner Autômato</h2>
+            <p>
+              Um produto simples, prático, responsivo e escalável. Prático pela fácil instalação e baixa manutenção. Simples pelo visual limpo e elegante. Responsivo pela tecnologia eficiente. Escalável pelo uso de um sistema de comunicação otimizado e rápido entre contêineres.
+            </p>
+          </div>
         </div>
-        <div className={styles.yellowBox}></div>
       </section>
-    </div>
-  );
-};
+    </main>
+  </>
+);
 
-export default WebPage;
+export default Homepage;
