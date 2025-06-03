@@ -1,9 +1,75 @@
 * {
-    padding: 0px;
-    margin: 0px;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    
-    /* NOTA: o asterisco serve para indicar que as estilizações aqui dentro serão atribuídas a TODOS os elementos. */
-    /* Costuma-se colocar justo esses 3 de base sempre */
 }
-.container {}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #FFFFFF; 
+    background: linear-gradient(to bottom, #7F51B0 0%, #430A81 60%, #430A81 100%);
+    min-height: 100vh;
+    background-attachment: fixed;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: transparent;
+    color: #fff;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.menu-icon div {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+main {
+    padding-top: 75px; /* Ajuste este valor se necessário para corresponder à altura exata do seu header */
+}
+
+.hero {
+    /* O hero tem uma imagem de fundo. Se quiser que o degradê apareça aqui, remova ou ajuste o background-image. */
+    background-image: url('https://via.placeholder.com/1500x800.png?text=C:\Users\Renan\OneDrive\Área de Trabalho\Absortech\DjangoAbsortech\React TS\public\homepageImg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding-top: 60px;
+}
+
+.hero-content h1 {
+    font-size: 4em;
+    margin-bottom: 0.2em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
