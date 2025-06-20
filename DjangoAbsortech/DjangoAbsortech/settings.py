@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-a@_swbrr3m0bsu(iux@n-f8kp)+!jwvmfom3v*z%f!*0)qe!*(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['labrador-lucky-factually.ngrok-free.app', '127.0.0.1']
+ALLOWED_HOSTS = ['18.231.186.125', 'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -134,3 +134,4 @@ STATICFILES_DIRS = [BASE_DIR / "static"]  # Diretório global de arquivos estát
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STATIC_ROOT = BASE_DIR / "staticfiles"
