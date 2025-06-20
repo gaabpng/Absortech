@@ -1,5 +1,5 @@
 import React from "react";
-import "./style.module.css";
+import "./styles.module.css";
 
 const Homepage: React.FC = () => (
   <>
