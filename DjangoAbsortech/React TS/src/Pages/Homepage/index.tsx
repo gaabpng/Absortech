@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import instagram from "../assets/InstagramLogo.png";
-import youtube from "../assets/YoutubeLogo.jpeg";
-import linkedin from "../assets/LinkedinLogo.png";
-import twitter from "../assets/TwitterLogo.jpeg";
-import poweredByLogo from "../assets/poweredby.jpeg"; // Logo para "Powered by", crie ou use um placeholder
+import React from "react";
+import instagram from "../../assets/InstagramLogo.png";
+import youtube from "../../assets/youtubeLogo.png";
+import linkedin from "../../assets/linkedlnLogo.png"; 
+import facebook from "../../assets/facebookLogo.png";
+import poweredByLogo from "../../assets/PoweredBy.png"; // Logo para "Powered by", crie ou use um placeholder
 
 import homepageImg from '../../assets/homepageImg.png'; // Sua imagem principal do topo (homepageImg.png)
 
@@ -14,7 +15,7 @@ import homepageImg from '../../assets/homepageImg.png'; // Sua imagem principal 
 // Caso a gente tenha um componente Status (que exibia contêineres), ele pode ser removido ou realocado
 // import Status from "../../componentes/Status"; 
 
-import styles from "./style.module.css";
+import styles from "./styles.module.css"; // Importando o CSS para estilização
 
 export default function Homepage() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function Homepage() {
             Dashboard
           </button>
         </div>
-        <h1 className={styles.topBarCenterTitle}>CS & EPS</h1>
+        <h1 className={styles.topBarCenterTitle}>CS EPS & WIE</h1>
         <div className={styles.topBarRight}>
           {/* Ícone de Menu Hambúrguer (pode ser um componente próprio depois) */}
           <div className={styles.menuIcon}>
@@ -43,8 +44,10 @@ export default function Homepage() {
       </header>
 
       <main>
-        {/* 2. Seção da Imagem de Fundo Superior (1/3 da tela)  Isso daqui ta bugado, não sei o porquê*/}
-        <section className={styles.topImageSection} style={{ backgroundImage: `url(${homepageImg})` }}>
+        {/* 2. Seção da Imagem de Fundo Superior (1/3 da tela) */}
+        <section className={styles.topImageSection}> {/* <<< AQUI VOLTA PARA topImageSection */}
+          {/* Você NÃO PRECISA de <img src={homepageImg} /> aqui se a imagem for um background-image */}
+          {/* Overlay para escurecer a imagem */} 
           <div className={styles.imageOverlay}></div>
           <div className={styles.topImageContent}>
             <h1>ABSORTECH</h1>
@@ -138,22 +141,28 @@ export default function Homepage() {
 
         <div className={styles.footerCenter}>
           <p className={styles.poweredByText}>Powered by</p>
-          <img src={poweredByLogo} alt="Powered by Logo" className={styles.poweredByLogo} />
+          <a href="https://edu.ieee.org/br-uff/" target="_blank" title="Powered by UFF">
+            <img src={poweredByLogo} alt="Powered by Logo" className={styles.poweredByLogo} />
+          </a>
+          <p className={styles.footerText}>© 2024 CS EPS & WIE. Todos
+  os direitos reservados.</p>
+          
         </div>
 
         <div className={styles.footerRight}>
           <div className={styles.socialIcons}>
-            <a href="https://www.instagram.com/cseps.uff/" target="_blank" title="Instagram CS & EPS">
-              <img src={instagram} alt="Instagram Logo" />
+            <a href="https://www.instagram.com/ieee.uff/" target="_blank" title="Instagram IEEE UFF">
+            <img src={instagram} alt="Instagram Logo" className={styles.instagramLogo} />
             </a>
-            <a href="https://www.youtube.com/your-channel" target="_blank" title="YouTube CS & EPS">
-              <img src={youtube} alt="YouTube Logo" />
+            <a href="https://www.youtube.com/user/ieeeuffsb" target="_blank" title="YouTube IEEE UFF">
+            <img src={youtube} alt="YouTube Logo" className={styles.youtubeLogo} />
             </a>
-            <a href="https://www.linkedin.com/your-company" target="_blank" title="LinkedIn CS & EPS">
-              <img src={linkedin} alt="LinkedIn Logo" />
+            <a href="https://br.linkedin.com/company/ramo-estudantil-ieee-uff" target="_blank" title="LinkedIn IEEE UFF">
+            <img src={linkedin} alt="LinkedIn Logo" className={styles.linkedinLogo} />
             </a>
-            <a href="https://twitter.com/your-account" target="_blank" title="Twitter CS & EPS">
-              <img src={twitter} alt="Twitter Logo" />
+            <a href="https://twitter.com/your-account" target="_blank" title="Facebook IEEE UFF">
+            <img src={facebook} alt="Facebook Logo" className={styles.FacebookLogo} />
+            
             </a>
           </div>
         </div>
