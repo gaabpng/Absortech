@@ -77,15 +77,14 @@ void setup() {
 StaticJsonDocument<128> doc;
 
 void loop() {
-  if (!client.connected()) {
-    reconnect();
-  }
-  client.loop();
+  if (!client.connected()) reconnect();
 
+  client.loop();
 
   //Le as informacoes do sensor, em cm e pol
   float cmMsec;
   long microsec = ultrasonic.timing();
+  
   cmMsec = ultrasonic.convert(microsec, Ultrasonic::CM);
 
   //Exibe informacoes no serial monitor

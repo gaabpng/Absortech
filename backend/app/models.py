@@ -22,7 +22,7 @@ class LeituraSensor(models.Model):
             return 100.0  # 100% se for menor que o mínimo
         elif self.valor_leitura > MAX_CM:
             return 0.0  # 0% se for maior que o máximo
-        
+
         # Cálculo da porcentagem
         porcentagem = ((MAX_CM - float(self.valor_leitura)) / (MAX_CM - MIN_CM)) * 100
         return round(porcentagem, 2)  # Retorna com 2 casas decimais

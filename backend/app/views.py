@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from .models import LeituraSensor
 from .serializers import LeituraSensorSerializer
 
+
 @api_view(['GET'])
 def obter_leituras(request):
     connection.close()  # Fecha a conexão para garantir que busque dados novos

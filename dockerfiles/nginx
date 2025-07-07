@@ -1,0 +1,4 @@
+FROM nginx:1.27-alpine
+COPY dockerfiles/configfiles/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY dockerfiles/configfiles/nginx/nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80 443 8080

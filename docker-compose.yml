@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  absortech-db:
+    image: postgres:15-alpine
+    container_name: absortech-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - absortech-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  absortech-api:
+    build:
+      context: ./
+      dockerfile: dockerfiles/django
+    container_name: absortech-api
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PORT: ${DB_PORT}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DJANGO_DEBUG: ${DJANGO_DEBUG}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
+    expose:
+      - "8000"
+    depends_on:
+      absortech-db:
+        condition: service_healthy
+    networks:
+      - absortech-network
+    restart: unless-stopped
+
+  absortech-app:
+    build:
+      context: ./
+      dockerfile: dockerfiles/node
+    container_name: absortech-app
+    expose:
+      - "3000"
+    networks:
+      - absortech-network
+    restart: unless-stopped
+
+  absortech-nginx:
+    build:
+      context: ./
+      dockerfile: dockerfiles/nginx
+    container_name: absortech-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    depends_on:
+      - absortech-api
+      - absortech-app
+    networks:
+      - absortech-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  absortech-network:
+    driver: bridge
