@@ -1,12 +1,6 @@
 FROM nginx:1.27-alpine
 
-RUN apk add --no-cache gettext
-
-COPY dockerfiles/configfiles/nginx/default.conf.template /etc/nginx/templates/default.conf.template
+COPY dockerfiles/configfiles/nginx/default.conf.template /etc/nginx/templates/
 COPY dockerfiles/configfiles/nginx/nginx.conf /etc/nginx/nginx.conf
-COPY dockerfiles/configfiles/nginx/entrypoint.sh /entrypoint.sh
 
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-
-EXPOSE 80 443 8080
+EXPOSE 80 443
