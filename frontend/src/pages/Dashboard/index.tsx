@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom"
-import instagram from "../../assets/InstagramLogo.png"
-import Status from "../../componentes/Status"
+import Status from "src/components/Status"
+
+import instagram from "assets/InstagramLogo.png"
 import styles from "./styles.module.css"
 
+import { useNavigate } from "react-router-dom"
+
 export default function Dashboard () {
-    
     const navigate = useNavigate()
     
     return (

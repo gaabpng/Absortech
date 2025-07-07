@@ -1,21 +1,20 @@
-import { useNavigate } from "react-router-dom";
-import React from "react";
-import instagram from "../../assets/InstagramLogo.png";
-import youtube from "../../assets/youtubeLogo.png";
-import linkedin from "../../assets/linkedlnLogo.png"; 
-import facebook from "../../assets/facebookLogo.png";
-import poweredByLogo from "../../assets/PoweredBy.png"; // Logo para "Powered by", crie ou use um placeholder
+import instagram from "assets/InstagramLogo.png";
+import youtube from "assets/youtubeLogo.png";
+import linkedin from "assets/linkedlnLogo.png"; 
+import facebook from "assets/facebookLogo.png";
+import poweredByLogo from "assets/PoweredBy.png";
 
-import homepageImg from '../../assets/homepageImg.png'; // Sua imagem principal do topo (homepageImg.png)
+// import homepageImg from '../../assets/homepageImg.png'; // Sua imagem principal do topo (homepageImg.png)
+
+import { useNavigate } from "react-router-dom";
 
 // Caso coloquemos um componente para o menu hambúrguer.
 // import MenuHamburguer from "../../componentes/MenuHamburguer";
 
-
 // Caso a gente tenha um componente Status (que exibia contêineres), ele pode ser removido ou realocado
 // import Status from "../../componentes/Status"; 
 
-import styles from "./styles.module.css"; // Importando o CSS para estilização
+import styles from "./styles.module.css";
 
 export default function Homepage() {
   const navigate = useNavigate();
@@ -45,7 +44,7 @@ export default function Homepage() {
 
       <main>
         {/* 2. Seção da Imagem de Fundo Superior (1/3 da tela) */}
-        <section className={styles.topImageSection}> {/* <<< AQUI VOLTA PARA topImageSection */}
+        <section className={styles.topImageSection}>
           {/* Você NÃO PRECISA de <img src={homepageImg} /> aqui se a imagem for um background-image */}
           {/* Overlay para escurecer a imagem */} 
           <div className={styles.imageOverlay}></div>
@@ -144,30 +143,27 @@ export default function Homepage() {
           <a href="https://edu.ieee.org/br-uff/" target="_blank" title="Powered by UFF">
             <img src={poweredByLogo} alt="Powered by Logo" className={styles.poweredByLogo} />
           </a>
-          <p className={styles.footerText}>© 2024 CS EPS & WIE. Todos
-  os direitos reservados.</p>
-          
+          <p className={styles.footerText}>© 2024 CS EPS & WIE. Todos os direitos reservados.</p>
         </div>
 
         <div className={styles.footerRight}>
           <div className={styles.socialIcons}>
             <a href="https://www.instagram.com/ieee.uff/" target="_blank" title="Instagram IEEE UFF">
-            <img src={instagram} alt="Instagram Logo" className={styles.instagramLogo} />
+              <img src={instagram} alt="Instagram Logo" className={styles.instagramLogo} />
             </a>
             <a href="https://www.youtube.com/user/ieeeuffsb" target="_blank" title="YouTube IEEE UFF">
-            <img src={youtube} alt="YouTube Logo" className={styles.youtubeLogo} />
+              <img src={youtube} alt="YouTube Logo" className={styles.youtubeLogo} />
             </a>
             <a href="https://br.linkedin.com/company/ramo-estudantil-ieee-uff" target="_blank" title="LinkedIn IEEE UFF">
-            <img src={linkedin} alt="LinkedIn Logo" className={styles.linkedinLogo} />
+              <img src={linkedin} alt="LinkedIn Logo" className={styles.linkedinLogo} />
             </a>
             <a href="https://twitter.com/your-account" target="_blank" title="Facebook IEEE UFF">
-            <img src={facebook} alt="Facebook Logo" className={styles.FacebookLogo} />
-            
+              <img src={facebook} alt="Facebook Logo" className={styles.FacebookLogo} />
             </a>
           </div>
         </div>
-        {/* Emanuel se você quiser colocar o iframe de mapa adiciona ele aqui
-            e estilizar com as classes do footer. Talvez em uma div separada ou acima dos links. */}
+        
+        {/* Emanuel se você quiser colocar o iframe de mapa adiciona ele aqui e estilizar com as classes do footer. Talvez em uma div separada ou acima dos links. */}
         {/* <iframe
             src="https://encurtador.com.br/DzsEf"
             className={styles.iframeMap}

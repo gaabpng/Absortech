@@ -7,6 +7,7 @@
     margin: 0px;
     box-sizing: border-box;
 }
+
 .header {
     background-color: #673998;
     color: #d6c4eb;
@@ -16,6 +17,7 @@
     gap: 150px;
     padding: 20px;
 }
+
 .buttonHomepage {
     height: 86px;
     background-color: #673998;
@@ -33,6 +35,7 @@
         transform: scale(1.1);
     }
 }
+
 .title1 {
     width: 305px;
     height: 86px;
@@ -41,6 +44,14 @@
     font-family:  "Inter", Arial, Helvetica, sans-serif;
     text-shadow: #430A81 10px 5px 6px;
 }
+
+.title2 {
+    font-weight: bolder;
+    font-size: 80px;
+    letter-spacing: 3px;
+    text-shadow: #430A81 5px 3px 3px;
+}
+
 .main {
     display: flex;
     flex-direction: column;
@@ -53,44 +64,45 @@
     padding-top: 80px;
     gap: 50px;
 }
-.title2 {
-    font-weight: bolder;
-    font-size: 80px;
-    letter-spacing: 3px;
-    text-shadow: #430A81 5px 3px 3px;
-}
+
 .statusDiv {
     display: flex;
     gap: 30px;
     padding-bottom: 100px;
 }
+
 .footer {
     background-color: #673998;
     display: flex;
     color: #FFFFFF;
     padding: 40px 60px 40px 150px;
 }
+
 .iframeMap {
     border: solid 7px #8a6aaf;
     border-radius: 20px;
     box-shadow: 6px 6px 5px rgba(67, 10, 129, 0.5);
 }
+
 .infoDiv {
     display: flex;
     align-items: center;
     gap: 350px;
 }
+
 .textDiv {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
+
 .text {
     padding-left: 30px;
     font-family: "Inter", Arial, Helvetica, sans-serif;
     font-weight: 100;
     font-size: 20px;
 }
+
 .linkDiv {
     display: flex;
     flex-direction: column;
@@ -100,6 +112,7 @@
     font-weight: 100;
     font-size: 35px;
 }
+
 .link {
     display: flex;
     align-items: center;
@@ -112,6 +125,7 @@
         color: #9e7ac4;
     }
 }
+
 .image {
     width: 50px;
 }

@@ -1,6 +1,7 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
 import styles from "./styles.module.css"
+
+import { useQuery } from "react-query";
+import { fetchLeituras } from "src/services/api";
 
 interface Leitura {
     andar: string;
@@ -9,31 +10,15 @@ interface Leitura {
     valor_leitura: number;
 }
 
-export default function Status () {
-    
-    const [leituras, setLeituras] = useState<Leitura[]>([]);
+export default function Status () {  
+    const { data: leituras } = useQuery<Leitura[]>('fetchLeituras', fetchLeituras, {
+        refetchInterval: 5000,
+        retry: false
+    });
 
-    useEffect(() => {
-        const fetchData = () => {
-            axios
-                .get<Leitura[]>("http://localhost:8000/api/leituras/")
-                .then((response) => {
-                    setLeituras(response.data);
-                })
-                .catch((error) => {
-                    console.error("Erro ao buscar leituras: ", error);
-                });
-        };
-
-        fetchData(); // Busca os dados imediatamente ao carregar a página
-        const interval = setInterval(fetchData, 5000); // Atualiza a cada 5 segundos
-
-        return () => clearInterval(interval); // Limpa o intervalo ao desmontar o componente
-    }, []);
-    // <p>Não há dados disponíveis.</p>
     return (
         <div>
-            {leituras.length > 0 ? (
+            {leituras && leituras.length > 0 ? (
                 leituras.map((item, index) => (
                     <div key={index} className={styles.container}>
                         <p className={styles.text1}>{item.andar}</p>
