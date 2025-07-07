@@ -60,6 +60,8 @@ services:
       context: ./
       dockerfile: dockerfiles/nginx
     container_name: absortech-nginx
+    environment:
+      - SERVER_NAME=${NGINX_SERVER_NAME}
     ports:
       - "80:80"
       - "443:443"
