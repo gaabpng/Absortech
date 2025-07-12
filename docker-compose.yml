@@ -62,6 +62,8 @@ services:
     container_name: absortech-nginx
     environment:
       - SERVER_NAME=${NGINX_SERVER_NAME}
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     ports:
       - "80:80"
       - "443:443"
