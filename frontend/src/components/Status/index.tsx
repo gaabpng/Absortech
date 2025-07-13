@@ -16,11 +16,6 @@ export default function Status () {
         retry: false
     });
 
-    // Debug: vamos ver o que está chegando
-    console.log('Leituras:', leituras);
-    console.log('IsLoading:', isLoading);
-    console.log('Error:', error);
-
     // Mostrar loading
     if (isLoading) {
         return (
@@ -38,7 +33,7 @@ export default function Status () {
             </div>
         );
     }
-    
+
     // Verificar se array está vazio
     if (!leituras || !Array.isArray(leituras) || leituras.length === 0) {
         return (
