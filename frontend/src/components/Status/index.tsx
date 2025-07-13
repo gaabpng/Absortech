@@ -11,28 +11,57 @@ interface Leitura {
 }
 
 export default function Status () {  
-    const { data: leituras } = useQuery<Leitura[]>('fetchLeituras', fetchLeituras, {
+    const { data: leituras, isLoading, error } = useQuery<Leitura[]>('fetchLeituras', fetchLeituras, {
         refetchInterval: 5000,
         retry: false
     });
 
+    // Debug: vamos ver o que está chegando
+    console.log('Leituras:', leituras);
+    console.log('IsLoading:', isLoading);
+    console.log('Error:', error);
+
+    // Mostrar loading
+    if (isLoading) {
+        return (
+            <div className={styles.container}>
+                <p className={styles.text1}>Carregando dados...</p>
+            </div>
+        );
+    }
+
+    // Mostrar erro
+    if (error) {
+        return (
+            <div className={styles.container}>
+                <p className={styles.text1}>Erro ao carregar dados.</p>
+            </div>
+        );
+    }
+    
+    // Verificar se array está vazio
+    if (!leituras || !Array.isArray(leituras) || leituras.length === 0) {
+        return (
+            <div className={styles.container}>
+                <p className={styles.text1}>Não há dados disponíveis.</p>
+            </div>
+        );
+    }
+
     return (
         <div>
-            {leituras && leituras.length > 0 ? (
-                leituras.map((item, index) => (
-                    <div key={index} className={styles.container}>
-                        <p className={styles.text1}>{item.andar}</p>
-                        <div className={styles.statusDiv}>
-                            <p className={styles.text2}>
-                                {item.valor_leitura > 3 ? "• Condição estável." : "• Alerta."}
-                                - {item.valor_leitura} absorvente(s)</p>
-                            <div className={item.valor_leitura >= 3 ? styles.greenSignal : styles.redSignal}></div>
-                        </div>
+            {leituras.map((item, index) => (
+                <div key={index} className={styles.container}>
+                    <p className={styles.text1}>{item.andar}</p>
+                    <div className={styles.statusDiv}>
+                        <p className={styles.text2}>
+                            {item.valor_leitura > 3 ? "• Condição estável." : "• Alerta."}
+                            - {item.valor_leitura} absorvente(s)
+                        </p>
+                        <div className={item.valor_leitura >= 3 ? styles.greenSignal : styles.redSignal}></div>
                     </div>
-                ))
-            ) : (
-                <p className={styles.text1}>Não há dados disponíveis.</p>
-            )}
+                </div>
+            ))}
         </div>
     )
 }
