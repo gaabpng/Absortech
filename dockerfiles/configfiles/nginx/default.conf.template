@@ -110,5 +110,8 @@ server {
         proxy_redirect off;
 
         proxy_set_header Accept-Encoding "";
+
+        # Adicionar CSP apenas para iframes
+        add_header Content-Security-Policy "frame-src 'self' https://www.google.com https://maps.google.com https://www.openstreetmap.org;" always;
     }
 }
