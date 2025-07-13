@@ -1,7 +1,7 @@
 import styles from "./styles.module.css"
 
-import { useQuery } from "react-query";
 import { fetchLeituras } from "src/services/api";
+import { useQuery } from "react-query";
 
 interface Leitura {
     andar: string;
@@ -34,7 +34,7 @@ export default function Status () {
         );
     }
 
-    // Verificar se array está vazio
+    // Mostrar mensagem se não houver leituras
     if (!leituras || !Array.isArray(leituras) || leituras.length === 0) {
         return (
             <div className={styles.container}>
