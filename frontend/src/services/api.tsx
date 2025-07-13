@@ -1,16 +1,10 @@
 import axios from "axios";
 
-export let baseURL = '';
-const url = window.location.host;
-
-if (url.includes("localhost") || url.includes("127.0.0.1")) {
-    baseURL = "http://localhost:80/api";
-} else if (url.startsWith('ec2')) {
-    baseURL = "http://ec2-54-175-178-188.compute-1.amazonaws.com:80/api"
-}
+const { protocol, hostname, port } = window.location;
+export const baseURL = `${protocol}//${hostname}${port ? `:${port}` : ''}/api`;
 
 const api = axios.create({
-    baseURL: baseURL,
+    baseURL,
     headers: {
         "Content-Type": "application/json",
     },
