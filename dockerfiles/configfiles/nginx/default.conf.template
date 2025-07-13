@@ -6,24 +6,26 @@ upstream django_api {
     server absortech-api:8000;
 }
 
-# Configuração para redirecionar HTTP para HTTPS
+# 1. Redireciona tudo de HTTP para HTTPS
 server {
     listen 80;
-    server_name ${SERVER_NAME};
-
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 80;
-    server_name ${SERVER_NAME};
+    server_name absortech.site;
 
     return 301 https://absortech.site$request_uri;
 }
 
+# 2. Redireciona acessos diretos ao DNS da EC2 (HTTP)
+server {
+    listen 80;
+    server_name ec2-54-175-178-188.compute-1.amazonaws.com;
+
+    return 301 https://absortech.site$request_uri;
+}
+
+# 3. Redireciona acessos diretos ao DNS da EC2 (HTTPS)
 server {
     listen 443 ssl;
-    server_name ${SERVER_NAME};
+    server_name ec2-54-175-178-188.compute-1.amazonaws.com;
 
     ssl_certificate /etc/letsencrypt/live/absortech.site/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/absortech.site/privkey.pem;
@@ -31,24 +33,22 @@ server {
     return 301 https://absortech.site$request_uri;
 }
 
+# 4. Servidor principal (HTTPS) para absortech.site
 server {
-    listen 443;
-    server_name ${SERVER_NAME};
+    listen 443 ssl;
+    server_name absortech.site;
 
     ssl_certificate /etc/letsencrypt/live/absortech.site/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/absortech.site/privkey.pem;
-    
-    # Configurações de timeout
+
     proxy_connect_timeout 60s;
     proxy_send_timeout 60s;
     proxy_read_timeout 60s;
 
-    # Configurações para WebSocket
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
 
-    # Proxy para a API Django
     location /api/ {
         proxy_pass http://django_api;
 
@@ -59,12 +59,10 @@ server {
         proxy_set_header X-Forwarded-Host $host;
         proxy_redirect off;
 
-        # Headers específicos para API
         proxy_set_header Content-Type $content_type;
         proxy_set_header Content-Length $content_length;
     }
 
-    # Proxy para admin do Django
     location /admin/ {
         proxy_pass http://django_api;
 
@@ -76,7 +74,6 @@ server {
         proxy_redirect off;
     }
 
-    # Servir arquivos estáticos do Django
     location /static/ {
         proxy_pass http://django_api;
 
@@ -90,7 +87,6 @@ server {
         add_header Cache-Control "public, immutable";
     }
 
-    # Servir arquivos de mídia do Django
     location /media/ {
         proxy_pass http://django_api;
 
@@ -104,7 +100,6 @@ server {
         add_header Cache-Control "public";
     }
 
-    # Tudo o resto vai para a aplicação React
     location / {
         proxy_pass http://react_app;
 
@@ -114,7 +109,6 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
         proxy_redirect off;
 
-        # Configurações específicas para React/Vite
         proxy_set_header Accept-Encoding "";
     }
 }
