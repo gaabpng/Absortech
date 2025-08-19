@@ -1,57 +1,70 @@
-import numpy as np
-import matplotlib.pyplot as plt
+# ESSE CÓDIGO DEPOIS DE CORRIGIDO SERÁ MESCLADO COM O DE ADICIONAR A INFORMAÇÃO NO BANCO DE DADOS
+import paho.mqtt.client as mqtt
+import json
+import sys
+import os
+import django
 
-# Número de posições à esquerda e à direita do zero
-L = 200  # tamanho total será 2*L+1
-n_steps = 200  # número de passos
+# Adicionar o caminho do diretório DjangoAbsortech ao sys.path
+sys.path.append(os.path.abspath('C:/Users/Gabriel/Documents/GitHub/Absortech/DjangoAbsortech'))
+print(sys.path)
 
-# Dimensão total: posições x coin (2)
-dim = 2 * L + 1
-state = np.zeros((dim, 2), dtype=complex)
+# Configuração do Django para encontrar o projeto
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.settings')
+django.setup()
 
-# Inicializa no centro com coin "up"
-state[L, 0] = 1 / np.sqrt(2)
-state[L, 1] = 1j / np.sqrt(2)  # coin com fase para interferência interessante
+from django.utils import timezone
+from app.models import LeituraSensor
 
-# Operador de coin (Hadamard)
-H = (1/np.sqrt(2)) * np.array([[1, 1],
-                               [1, -1]], dtype=complex)
+# Função chamada quando uma mensagem é recebida
+def on_message(client, userdata, msg):
+    
+    #BLOCO PARA TRATAR ERROS ORIUNDOS DO JSON
+    try:
+        agora = timezone.now()
+        # DECODIFICANDO OS DADOS VINDOS DO JSON
+        payload = json.loads(msg.payload.decode())
+        measure = payload["measure"]
+        _andar = payload["andar"]
 
-def apply_coin(state):
-    new_state = np.zeros_like(state)
-    for pos in range(dim):
-        new_state[pos] = H @ state[pos]
-    return new_state
+        # CRIANDO OBJETO COM DADOS DO JSON
+        leitura = LeituraSensor(
+            data = agora.date(),
+            hora = agora.time(),
+            andar = _andar,
+            valor_leitura = measure
+        )
 
-def apply_shift(state):
-    new_state = np.zeros_like(state)
-    for pos in range(1, dim - 1):
-        # Coin up → move para direita
-        new_state[pos + 1, 0] += state[pos, 0]
-        # Coin down → move para esquerda
-        new_state[pos - 1, 1] += state[pos, 1]
-    return new_state
+        #SALVANDO
+        leitura.save()
 
-# Evolução temporal
-for _ in range(n_steps):
-    state = apply_coin(state)
-    state = apply_shift(state)
+        print(f"Andar: {_andar} - Valor recebido: {measure}")
+    except json.JSONDecodeError as erro:
+        print("Mensagem JSON Inválida!", erro)
 
-# Densidade de probabilidade final por posição (soma dos módulos quadrados das amplitudes)
-# Cria arrays de posição e probabilidade
-positions = np.arange(-L, L+1)
-prob_dist = np.abs(state[:, 0])**2 + np.abs(state[:, 1])**2
+#LÓGICA PRINCIPAL DO PROGRAMA
+def main():
+    # Configurações do cliente MQTT
+    client = mqtt.Client()
 
-# Filtrar apenas posições com probabilidade > 0
-positions_nonzero = positions[prob_dist > 0]
-prob_dist_nonzero = prob_dist[prob_dist > 0]
+    # Configura a função de callback para quando uma mensagem for recebida
+    client.on_message = on_message
 
-# Plot
-plt.figure(figsize=(10, 5))
-plt.plot(positions_nonzero, prob_dist_nonzero, label=f'{n_steps} passos')
-plt.title('Distribuição de probabilidade - Caminhada Quântica 1D (sem zeros)')
-plt.xlabel('Posição')
-plt.ylabel('Probabilidade')
-plt.grid(True)
-plt.legend()
-plt.show()
+    # Conecte ao broker MQTT (substitua pelo endereço e porta corretos)
+    client.connect("broker.hivemq.com", 1883)
+
+    # Inscreva-se em um tópico (substitua pelo tópico correto)
+    client.subscribe("SENSOR/ULTRASSOM")
+
+    # Inicie o loop para receber as mensagens
+    #client.loop_start()
+
+    # FUNÇÃO MQTT PARA FICAR CONTINUAMENTE ESCUTANDO MENSAGENS, TRATA RECONEXÃO CASO NECESSÁRIO
+    client.loop_forever()
+
+    # É REALMENTE NECESSÁRIO TER ESSE PRINT AQUI ?
+    #print(f"Valor final do tópico: {topic_value}")
+
+# INICIALIZAÇÃO
+if __name__ == "__main__":
+    main()
