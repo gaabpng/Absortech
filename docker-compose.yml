@@ -53,6 +53,27 @@ services:
       - absortech-network
     restart: unless-stopped
 
+  absortech-iot:
+    build:
+      context: ./
+      dockerfile: dockerfiles/iot
+    container_name: absortech-iot
+    environment:
+      DB_HOST: absortech-db
+      DB_NAME: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+      DB_PORT: ${POSTGRES_PORT}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      DJANGO_DEBUG: ${DJANGO_DEBUG}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS}
+    depends_on:
+      absortech-db:
+        condition: service_healthy
+    networks:
+      - absortech-network
+    restart: unless-stopped
+  
   absortech-nginx:
     build:
       context: ./
