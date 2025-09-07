@@ -1,14 +1,7 @@
-// Dashboard.tsx - ATUALIZADO
-
 import { useNavigate } from "react-router-dom";
 import Status from "../../componentes/Status";
-
-// Estilos específicos da Dashboard (agora mais limpos)
 import styles from "./styles.module.css";
-// Importando os estilos da Homepage para reutilizar o layout!
 import homeStyles from "../Homepage/styles.module.css"; 
-
-// Importando os mesmos assets do rodapé da Homepage para consistência
 import instagram from "../../assets/InstagramLogo.png";
 import youtube from "../../assets/youtubeLogo.png";
 import linkedin from "../../assets/linkedlnLogo.png"; 
@@ -19,7 +12,6 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   return (
-    // Usamos o container principal da Homepage
     <div className={homeStyles.container}>
       {/* 1. HEADER PADRONIZADO (copiado da Homepage) */}
       <header className={homeStyles.topBarHeader}>
