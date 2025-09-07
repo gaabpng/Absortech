@@ -1,71 +1,87 @@
-import Status from "src/components/Status"
+// Dashboard.tsx - ATUALIZADO
 
-import instagram from "assets/InstagramLogo.png"
-import styles from "./styles.module.css"
+import { useNavigate } from "react-router-dom";
+import Status from "../../componentes/Status";
 
-import { useNavigate } from "react-router-dom"
+// Estilos específicos da Dashboard (agora mais limpos)
+import styles from "./styles.module.css";
+// Importando os estilos da Homepage para reutilizar o layout!
+import homeStyles from "../Homepage/styles.module.css"; 
 
-export default function Dashboard () {
-    const navigate = useNavigate()
-    
-    return (
-        <div className={styles.container}>
-            <header className={styles.header}>
-                <button
-                    className={styles.buttonHomepage}
-                    onClick={() => (navigate("/"))}>
-                    ABSORTECH
-                </button>
-                <h1 className={styles.title1}>CS & EPS</h1>
-            </header>
+// Importando os mesmos assets do rodapé da Homepage para consistência
+import instagram from "../../assets/InstagramLogo.png";
+import youtube from "../../assets/youtubeLogo.png";
+import linkedin from "../../assets/linkedlnLogo.png"; 
+import facebook from "../../assets/facebookLogo.png";
+import poweredByLogo from "../../assets/PoweredBy.png";
 
-            <main className={styles.main}>
-                <h1 className={styles.title2}>Contêineres - Prédio de Engenharia</h1>
-                <div className={styles.statusDiv}>
-                    <Status />
-                </div>
-            </main>
+export default function Dashboard() {
+  const navigate = useNavigate();
 
-            <footer className={styles.footer}>
-                <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3090.4987753989867!2d-43.13047291210388!3d-22.904401404628768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x99817e444e692b%3A0xfd5e35fb577af2f5!2sUFF%20-%20Instituto%20de%20Computa%C3%A7%C3%A3o!5e0!3m2!1spt-BR!2sbr!4v1745450252013!5m2!1spt-BR!2sbr"
-                className={styles.iframeMap}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                allowFullScreen
-                ></iframe>
-                <div className={styles.infoDiv}>
-                    <div className={styles.textDiv}>
-                        <p className={styles.text}>IC - Instituto de Computação</p>
-                        <p className={styles.text}>UFF - Universidade Federal Fluminense</p>
-                        <p className={styles.text}>Avenida Gal. Milton Tavares de Souza, s/n</p>
-                        <p className={styles.text}>São Domingos, Niterói, RJ - 24210-310</p>
-                    </div>
-                    <div className={styles.linkDiv}>
-                        <a 
-                            href="https://www.instagram.com/cseps.uff/" 
-                            target="_blank"
-                            className={styles.link}>
-                            <img 
-                                src={instagram} 
-                                alt="Link para a CS & EPS"
-                                className={styles.image}
-                                title="Logo do Instagram"/>
-                            CS & EPS</a>
-                        <a 
-                            href="https://www.instagram.com/ieee.uff/" 
-                            target="_blank"
-                            className={styles.link}>
-                            <img 
-                                src={instagram} 
-                                alt="Link para o Ramo IEEE UFF"
-                                className={styles.image}
-                                title="Logo do Instagram"/>
-                            Ramo IEEE UFF</a>
-                    </div>
-                </div>
-            </footer>
+  return (
+    // Usamos o container principal da Homepage
+    <div className={homeStyles.container}>
+      {/* 1. HEADER PADRONIZADO (copiado da Homepage) */}
+      <header className={homeStyles.topBarHeader}>
+        <div className={homeStyles.topBarLeft}>
+          <button
+            className={homeStyles.buttonHomepage}
+            onClick={() => navigate("/")} // Modificado para voltar para a Homepage
+          >
+            Homepage 
+          </button>
         </div>
-    )
+        <h1 className={homeStyles.topBarCenterTitle}>CS EPS & WIE</h1>
+        <div className={homeStyles.topBarRight}>
+          <div className={homeStyles.menuIcon}>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </header>
+
+      {/* 2. CONTEÚDO PRINCIPAL DA DASHBOARD */}
+      <main className={styles.dashboardMainContent}>
+        <h1 className={styles.title}>Contêineres - Prédio de Engenharia</h1>
+        <div className={styles.statusDiv}>
+          <Status />
+          {/* Você pode adicionar mais componentes Status aqui se precisar */}
+        </div>
+      </main>
+
+      {/* 3. FOOTER PADRONIZADO (copiado da Homepage) */}
+      <footer className={homeStyles.footer}>
+        <div className={homeStyles.footerLeft}>
+          <p><a href="#">Termos de Uso</a></p>
+          <p><a href="#">Política de Privacidade</a></p>
+        </div>
+
+        <div className={homeStyles.footerCenter}>
+          <p className={homeStyles.poweredByText}>Powered by</p>
+          <a href="https://edu.ieee.org/br-uff/" target="_blank" rel="noopener noreferrer" title="Powered by UFF">
+            <img src={poweredByLogo} alt="Powered by Logo" className={homeStyles.poweredByLogo} />
+          </a>
+          <p className={homeStyles.footerText}>© 2024 CS EPS & WIE. Todos os direitos reservados.</p>
+        </div>
+
+        <div className={homeStyles.footerRight}>
+          <div className={homeStyles.socialIcons}>
+            <a href="https://www.instagram.com/ieee.uff/" target="_blank" rel="noopener noreferrer" title="Instagram IEEE UFF">
+              <img src={instagram} alt="Instagram Logo" />
+            </a>
+            <a href="https://www.youtube.com/user/ieeeuffsb" target="_blank" rel="noopener noreferrer" title="YouTube IEEE UFF">
+              <img src={youtube} alt="YouTube Logo" />
+            </a>
+            <a href="https://br.linkedin.com/company/ramo-estudantil-ieee-uff" target="_blank" rel="noopener noreferrer" title="LinkedIn IEEE UFF">
+              <img src={linkedin} alt="LinkedIn Logo" />
+            </a>
+            <a href="https://twitter.com/your-account" target="_blank" rel="noopener noreferrer" title="Facebook IEEE UFF">
+              <img src={facebook} alt="Facebook Logo" />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
 }
