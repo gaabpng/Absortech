@@ -2,11 +2,10 @@
 FROM node:22.16-slim AS builder
 WORKDIR /app
 
-# Limita memória do Node durante build
-ENV NODE_OPTIONS="--max-old-space-size=768"
-
 COPY frontend/package.json frontend/yarn.lock ./
-RUN yarn install --frozen-lockfile && yarn cache clean
+
+RUN yarn install --frozen-lockfile --ignore-optional=false && yarn cache clean
+
 COPY frontend/ ./
 RUN yarn build
 
