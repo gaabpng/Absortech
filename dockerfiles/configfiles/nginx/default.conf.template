@@ -6,12 +6,20 @@ upstream django_api {
     server absortech-api:8000;
 }
 
-# 1. Redireciona tudo de HTTP para HTTPS
+# 1. Servidor HTTP para absortech.site (com suporte ao Certbot)
 server {
     listen 80;
     server_name absortech.site;
 
-    return 301 https://absortech.site$request_uri;
+    # Configuração para o Certbot (deve vir antes do redirect)
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    # Redireciona todo o resto para HTTPS
+    location / {
+        return 301 https://absortech.site$request_uri;
+    }
 }
 
 # 2. Redireciona acessos diretos ao DNS da EC2 (HTTP)
@@ -19,7 +27,15 @@ server {
     listen 80;
     server_name ec2-54-175-178-188.compute-1.amazonaws.com;
 
-    return 301 https://absortech.site$request_uri;
+    # Configuração para o Certbot (caso precise renovar para este domínio também)
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    # Redireciona todo o resto
+    location / {
+        return 301 https://absortech.site$request_uri;
+    }
 }
 
 # 3. Redireciona acessos diretos ao DNS da EC2 (HTTPS)
