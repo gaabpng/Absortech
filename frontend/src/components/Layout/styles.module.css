@@ -1,0 +1,213 @@
+/* ==================== HEADER ==================== */
+.topBarHeader {
+    background-color: #430A81;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.topBarLeft,
+.topBarRight {
+    display: flex;
+    align-items: center;
+}
+
+.topBarLeft button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.1em;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.topBarLeft button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.topBarCenterTitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.menuIcon {
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.menuIcon div {
+    width: 100%;
+    height: 3px;
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+    background-color: #430A81;
+    color: #fff;
+    padding: 30px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+}
+
+.footerLeft,
+.footerCenter,
+.footerRight {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px;
+}
+
+.footerLeft {
+    text-align: left;
+}
+
+.footerLeft p {
+    margin-bottom: 5px;
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.footerLeft a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footerLeft a:hover {
+    color: #fff;
+}
+
+.footerCenter {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.poweredByText {
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.poweredByLogo {
+    max-width: 90px;
+    height: auto;
+    filter: brightness(0) invert(1);
+}
+
+.footerText {
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.footerRight {
+    text-align: right;
+}
+
+.socialIcons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.socialIcons a {
+    display: block;
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease;
+}
+
+.socialIcons a:hover {
+    transform: translateY(-3px);
+}
+
+.socialIcons img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+@media (max-width: 768px) {
+    .topBarHeader {
+        flex-direction: column;
+        padding: 10px 15px;
+    }
+
+    .topBarLeft,
+    .topBarRight {
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .topBarCenterTitle {
+        order: -1;
+        margin-bottom: 10px;
+    }
+
+    .footer {
+        flex-direction: column;
+        padding: 25px 15px;
+        gap: 15px;
+    }
+
+    .footerLeft,
+    .footerCenter,
+    .footerRight {
+        min-width: unset;
+        width: 100%;
+        text-align: center;
+    }
+
+    .footerRight .socialIcons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .topBarLeft button {
+        font-size: 1em;
+    }
+
+    .topBarCenterTitle {
+        font-size: 1.2em;
+    }
+
+    .footer {
+        padding: 20px 15px;
+    }
+
+    .poweredByLogo {
+        max-width: 75px;
+    }
+
+    .socialIcons a {
+        width: 25px;
+        height: 25px;
+    }
+}

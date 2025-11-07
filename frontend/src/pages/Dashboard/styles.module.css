@@ -1,42 +1,54 @@
-.dashboardMainContent {
-  background: linear-gradient(to bottom, #7F51B0 0%, #430A81 60%, #430A81 100%);
-  padding: 80px 20px; /* Espaçamento interno (vertical e horizontal) */
-  min-height: 60vh; /* Altura mínima para preencher a tela */
+.dashboardSection {
+  padding: 16px;
+}
+
+.title {
+  font-family: Arial, sans-serif;
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 2.5em;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+.statusDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 50px; /* Espaço entre o título e os contêineres */
+  gap: 40px;
   width: 100%;
+  max-width: 900px;
+  padding: 0 20px;
 }
 
-/* Título principal da página */
-.title {
-  font-family: Arial, sans-serif; /* Usando a fonte padrão da homepage */
-  color: #FFFFFF; /* Cor do texto padrão */
-  font-weight: bold; /* 'bolder' pode variar, 'bold' é mais consistente */
-  font-size: 3em; /* Tamanho ajustado para ser impactante mas legível */
-  text-align: center;
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+@media (max-width: 1024px) {
+  .title {
+    font-size: 2.2em;
+  }
 }
 
-/* Container para os componentes de Status */
-.statusDiv {
-  display: flex;
-  flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha em telas menores */
-  justify-content: center; /* Centraliza os contêineres */
-  gap: 30px;
-  width: 100%;
-  max-width: 1200px; /* Limita a largura máxima para melhor visualização */
-}
-
-/* Media query para telas menores, como celulares */
 @media (max-width: 768px) {
   .title {
-    font-size: 2.2em; /* Reduz o tamanho da fonte em telas menores */
+    font-size: 1.8em;
+    letter-spacing: 0.5px;
   }
 
-  .dashboardMainContent {
-    padding: 60px 15px;
+  .statusDiv {
+    gap: 30px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5em;
+    padding: 0 10px;
+  }
+
+  .statusDiv {
+    gap: 25px;
   }
 }
