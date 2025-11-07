@@ -13,7 +13,7 @@ const char* ssid = "nomeWifi";
 const char* password = "SenhaWifi";
 
 // Configurações do MQTT
-const char *mqtt_server = "iot.eclipse.org";
+const char *mqtt_server = "broker.mqtt.cool";
 const int mqtt_port = 1883;
 const char* mqtt_topic = "SENSOR/ULTRASSOM";
 
