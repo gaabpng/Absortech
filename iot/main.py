@@ -56,7 +56,7 @@ def main():
     client.on_message = on_message
 
     # Conecta ao broker MQTT (substitua se precisar)
-    client.connect("broker.hivemq.com", 1883)
+    client.connect("iot.eclipse.org", 1883, 60)
 
     # Inscreve-se no tópico
     client.subscribe("SENSOR/ULTRASSOM")
