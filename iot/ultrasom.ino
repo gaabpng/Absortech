@@ -15,7 +15,7 @@ const char* password = "SenhaWifi";
 // Configurações do MQTT
 const char *mqtt_server = "broker.mqtt.cool";
 const int mqtt_port = 1883;
-const char* mqtt_topic = "SENSOR/ULTRASSOM";
+const char *mqtt_topic = "SENSOR/ULTRASSOM";
 
 // Criação dos objetos WiFi e MQTT
 WiFiClient espClient;
@@ -84,8 +84,6 @@ StaticJsonDocument<128> doc;
 void loop() {
   if (!client.connected()) reconnect();
 
-  client.loop();
-
   //Le as informacoes do sensor, em cm e pol
   float cmMsec;
   long microsec = ultrasonic.timing();
@@ -110,6 +108,9 @@ void loop() {
 
   // PUBLICA OS DADOS DO SENSOR
   client.publish(mqtt_topic, jsonOutput.c_str());
+  client.loop();
+
+  delay(300);
 
   // COLOCA O ESP32 PARA ESPERAR (MODO DE ECONOMIA) PELA QUANTIDADE DE MINUTOS ESPECIFICADA
   esp_sleep_enable_timer_wakeup(MINUTES_TO_SLEEP * uS_TO_MINUTE_FACTOR);
