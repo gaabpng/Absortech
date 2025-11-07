@@ -13,8 +13,8 @@ const char* ssid = "nomeWifi";
 const char* password = "SenhaWifi";
 
 // Configurações do MQTT
-const char* mqtt_server = "broker.hivemq.com"; // Insira o endereço do seu servidor MQTT
-const int mqtt_port = 1883; // Porta padrão do MQTT
+const char *mqtt_server = "iot.eclipse.org";
+const int mqtt_port = 1883;
 const char* mqtt_topic = "SENSOR/ULTRASSOM";
 
 // Criação dos objetos WiFi e MQTT
@@ -31,6 +31,7 @@ Ultrasonic ultrasonic(pino_trigger, pino_echo);
 // Função para conectar ao Wi-Fi
 void setup_wifi() {
   delay(10);
+
   Serial.println();
   Serial.print("Conectando-se a ");
   Serial.println(ssid);
@@ -55,12 +56,14 @@ void callback(char* topic, byte* message, unsigned int length) {}
 void reconnect() {
   while (!client.connected()) {
     Serial.print("Tentando conexão MQTT...");
+
     if (client.connect("ESP32Client")) {
       Serial.println("conectado");
     } else {
       Serial.print("falha, rc=");
       Serial.print(client.state());
       Serial.println(" tentando novamente em 5 segundos");
+
       delay(5000);
     }
   }
@@ -68,7 +71,9 @@ void reconnect() {
 
 void setup() {
   Serial.begin(115200);
+
   setup_wifi();
+
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(callback);
 }
@@ -100,7 +105,7 @@ void loop() {
   serializeJson(doc, jsonOutput);
 
   // PUBLICA OS DADOS DO SENSOR
-  Serial.print("Publicando: ");
+  Serial.print("\nPublicando: ");
   Serial.println(jsonOutput);
 
   // PUBLICA OS DADOS DO SENSOR
