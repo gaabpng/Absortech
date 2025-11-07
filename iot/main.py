@@ -61,7 +61,7 @@ def main():
     # Inscreve-se no tópico
     client.subscribe("SENSOR/ULTRASSOM")
 
-    print("Aguardando mensagens no tópico 'SENSOR/ULTRASSOM'...")
+    print("=> Aguardando mensagens no tópico 'SENSOR/ULTRASSOM'...")
     
     # Loop para ficar continuamente escutando
     client.loop_forever()
