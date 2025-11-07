@@ -49,8 +49,8 @@ def on_message(client, userdata, msg):
 
 def main():
     # Configurações do cliente MQTT
-    client = mqtt.Client()
-    print(client)
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    client.enable_logger()
 
     # Configura a função de callback
     client.on_message = on_message
