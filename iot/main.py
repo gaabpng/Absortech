@@ -4,17 +4,14 @@ import sys
 import os
 import django
 
-# Adicionar o caminho do diretório DjangoAbsortech ao sys.path
 sys.path.append(os.path.abspath('./backend'))
-
-# Configuração do Django para encontrar o projeto
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.settings')
+
 django.setup()
 
 from django.utils import timezone
 from app.models import LeituraSensor
 
-# Função chamada quando uma mensagem é recebida
 def on_message(client, userdata, msg):
     try:
         agora = timezone.now()
@@ -41,18 +38,19 @@ def on_message(client, userdata, msg):
 
         # Salvando no banco
         leitura.save()
-        print(f"✅ Dados salvos no banco -> Data: {leitura.data}, Hora: {leitura.hora}, "
+
+        print(f"Dados salvos no banco -> Data: {leitura.data}, Hora: {leitura.hora}, "
               f"Andar: {leitura.andar}, Valor: {leitura.valor_leitura}\n")
 
     except json.JSONDecodeError as erro:
-        print("❌ Mensagem JSON inválida!", erro)
+        print("Mensagem JSON inválida!", erro)
     except Exception as e:
-        print("❌ Erro ao processar mensagem:", e)
+        print("Erro ao processar mensagem:", e)
 
-# Lógica principal do programa
 def main():
     # Configurações do cliente MQTT
     client = mqtt.Client()
+    print(client)
 
     # Configura a função de callback
     client.on_message = on_message
@@ -63,11 +61,10 @@ def main():
     # Inscreve-se no tópico
     client.subscribe("SENSOR/ULTRASSOM")
 
-    print("🚀 Aguardando mensagens no tópico 'SENSOR/ULTRASSOM'...")
+    print("Aguardando mensagens no tópico 'SENSOR/ULTRASSOM'...")
     
     # Loop para ficar continuamente escutando
     client.loop_forever()
 
-# Inicialização
 if __name__ == "__main__":
     main()
