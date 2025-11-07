@@ -3,9 +3,8 @@
 #include <Ultrasonic.h>
 #include <ArduinoJson.h>
 
-#define MINUTES_TO_SLEEP  10
+#define MINUTES_TO_SLEEP    10
 #define uS_TO_MINUTE_FACTOR 60000000
-#define uS_TO_SECOND_FACTOR 1000000
 #define ANDAR 1
 
 // Configurações de Wi-Fi
@@ -13,7 +12,7 @@ const char* ssid = "nomeWifi";
 const char* password = "SenhaWifi";
 
 // Configurações do MQTT
-const char *mqtt_server = "broker.mqtt.cool";
+const char *mqtt_server = "broker.hivemq.com";
 const int mqtt_port = 1883;
 const char *mqtt_topic = "SENSOR/ULTRASSOM";
 
@@ -82,7 +81,8 @@ void setup() {
 StaticJsonDocument<128> doc;
 
 void loop() {
-  if (!client.connected()) reconnect();
+  if (!client.connected())
+    reconnect();
 
   //Le as informacoes do sensor, em cm e pol
   float cmMsec;
@@ -92,7 +92,7 @@ void loop() {
 
   //Exibe informacoes no serial monitor
   Serial.print("Distancia em cm: ");
-  Serial.print(cmMsec   );
+  Serial.print(cmMsec);
 
   // GUARDA AS INFORMAÇÕES NO OBJETO JSON
   doc["measure"] = cmMsec;
@@ -102,7 +102,6 @@ void loop() {
   String jsonOutput;
   serializeJson(doc, jsonOutput);
 
-  // PUBLICA OS DADOS DO SENSOR
   Serial.print("\nPublicando: ");
   Serial.println(jsonOutput);
 
