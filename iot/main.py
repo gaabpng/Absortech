@@ -54,14 +54,14 @@ def main():
 
     # Configura a função de callback
     client.on_message = on_message
-
+    
     # Conecta ao broker MQTT (substitua se precisar)
-    client.connect("iot.eclipse.org", 1883, 60)
+    client.connect("broker.mqtt.cool", 1883, 60)
 
     # Inscreve-se no tópico
     client.subscribe("SENSOR/ULTRASSOM")
 
-    print("=> Aguardando mensagens no tópico 'SENSOR/ULTRASSOM'...")
+    print("Aguardando mensagens no tópico 'SENSOR/ULTRASSOM'...")
     
     # Loop para ficar continuamente escutando
     client.loop_forever()
