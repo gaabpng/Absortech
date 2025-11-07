@@ -1,0 +1,237 @@
+.container {
+    width: 100%;
+    position: relative;
+}
+
+/* 1. Seção da Imagem de Fundo Superior */
+.topImageSection {
+    background-image: url('assets/homePageImg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 66vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+
+.imageOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(67, 10, 129, 0.5);
+    z-index: 1;
+}
+
+.topImageContent {
+    position: relative;
+    z-index: 2;
+    padding: 0 20px;
+}
+
+.topImageContent h1 {
+    font-size: 4em;
+    margin-bottom: 0.05em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    line-height: 1;
+}
+
+.topImageContent p {
+    font-size: 1.6em;
+    margin-top: 0;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+/* 2. Seção de Blocos (Caixinhas) */
+.textBlocksSection {
+    background-color: #430A81;
+    padding: 60px 0;
+}
+
+.textBlocksContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.textBlock {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 30px;
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.textBlock:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+}
+
+.yellowSquare {
+    background-color: #FFD700;
+    min-width: 25px;
+    height: 25px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 5px;
+}
+
+.textBlockContent {
+    flex: 1;
+}
+
+.textBlockContent h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.textBlockContent p {
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.mainContentSection {
+    background: linear-gradient(to bottom, #7F51B0 0%, #430A81 60%, #430A81 100%);
+    padding: 60px 0;
+}
+
+.mainContentContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.content-flex {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.content-flex.reverse {
+    flex-direction: row-reverse;
+}
+
+.placeholder-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    min-width: 300px;
+    height: 200px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    margin-top: 20px;
+}
+
+.text-content {
+    flex: 1;
+}
+
+.text-content h2 {
+    font-size: 2.2em;
+    margin-bottom: 15px;
+}
+
+.text-content p {
+    font-size: 1.1em;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .textBlocksContainer {
+        gap: 20px;
+    }
+    .textBlock {
+        min-width: 250px;
+        max-width: 300px;
+    }
+    .topImageContent h1 {
+        font-size: 3.5em;
+    }
+    .topImageContent p {
+        font-size: 1.4em;
+    }
+}
+
+@media (max-width: 768px) {
+    .topImageSection {
+        height: 40vh;
+    }
+
+    .topImageContent h1 {
+        font-size: 2.5em;
+    }
+
+    .topImageContent p {
+        font-size: 1.2em;
+    }
+
+    .textBlocksContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .textBlock {
+        width: 90%;
+        max-width: none;
+    }
+
+    .content-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .content-flex.reverse {
+        flex-direction: column;
+    }
+
+    .placeholder-box {
+        width: 90%;
+        min-width: unset;
+    }
+}
+
+@media (max-width: 480px) {
+    .topBarLeft button {
+        font-size: 1em;
+    }
+    .topBarCenterTitle {
+        font-size: 1.2em;
+    }
+    .topImageSection {
+        height: 50vh;
+    }
+    .topImageContent h1 {
+        font-size: 2em;
+    }
+    .topImageContent p {
+        font-size: 1em;
+    }
+    .textBlockContent h2 {
+        font-size: 1.5em;
+    }
+    .textBlockContent p {
+        font-size: 0.9em;
+    }
+}
