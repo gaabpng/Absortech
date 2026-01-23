@@ -17,4 +17,9 @@ def on_subscribe(client, userdata, mid, granted_qos):
 def on_mensage(client, userdata, message):
     print("Mensagem recebida!")
     print(client)
-    print(message.payload.decode("utf-8"))
+    try:
+        payload = message.payload.decode("utf-8")
+    except UnicodeDecodeError:
+        # Tenta decodificar com latin-1 (iso-8859-1) que aceita qualquer byte
+        payload = message.payload.decode("latin-1")
+    print(payload)
