@@ -10,22 +10,6 @@ interface Leitura {
 }
 
 export default function Status() {
-  const EMPTY_HEIGHT = 20.73; // Sensor reading when empty (cm)
-  const USABLE_HEIGHT = 15;   // Maximum fillable height (cm)
-  const MAX_PADS = 12;        // How many pads fit in 15cm
-
-  const calculatePads = (sensorReading: number): number => {
-    // Calculate height occupied by pads
-    const occupiedHeight = EMPTY_HEIGHT - sensorReading;
-    const validHeight = Math.max(0, Math.min(occupiedHeight, USABLE_HEIGHT));
-    
-    // Rule of three: if 15cm = MAX_PADS, then validHeight = ?
-    // pads = (validHeight * MAX_PADS) / USABLE_HEIGHT
-    const padQuantity = (validHeight * MAX_PADS) / USABLE_HEIGHT;
-    
-    return Math.round(padQuantity);
-  };
-
   const {
     data: leituras,
     isLoading,
@@ -65,7 +49,7 @@ export default function Status() {
   return (
     <div className={styles.status}>
       {leituras.map((item, index) => {
-        const quantidadeAbsorventes = calculatePads(item.valor_leitura);
+        const quantidadeAbsorventes = item.valor_leitura;
         
         return (
           <div key={index} className={styles.container}>
