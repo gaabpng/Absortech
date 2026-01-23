@@ -1,5 +1,5 @@
 import paho.mqtt.client as mqtt
-from .callbacks import on_connect, on_subscribe, on_mensage
+from .callbacks import on_connect, on_subscribe, on_message
 
 
 # Configura o conector do cliente
@@ -19,10 +19,14 @@ class MQTTClientConnection:
             callback_api_version=mqtt.CallbackAPIVersion.VERSION1
         )
 
+        print("New connection started", self.__client_name)
+        print("Broker ip", self.__broker_ip)
+
         # Callbacks
         mqtt_client.on_connect   = on_connect
         mqtt_client.on_subscribe = on_subscribe
-        mqtt_client.on_message   = on_mensage
+        mqtt_client.on_message   = on_message
+
         mqtt_client.connect(host=self.__broker_ip, port=self.__port, keepalive=self.__keepalive)
         
         self.__mqtt_client = mqtt_client
