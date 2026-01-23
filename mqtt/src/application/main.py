@@ -1,10 +1,20 @@
+import sys
+import os
+
 from time import sleep
+
+import django
+
+# Django setup - must be done before importing models
+sys.path.insert(0, '/app/backend')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'DjangoAbsortech.settings')
+django.setup()
 
 from src.config.broker_configs import mqtt_broker_configs
 from src.application.client.mqtt_client_connection import MQTTClientConnection
 
 
-# Pega as informações do broker, configura o client e inicia a conexão
+# Gets broker info, configures client and starts connection
 def start():
     mqtt_client_connection = MQTTClientConnection(
         mqtt_broker_configs["HOST"],
