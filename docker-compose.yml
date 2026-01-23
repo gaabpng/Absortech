@@ -109,15 +109,21 @@ services:
       - ./mqtt/mosquitto/config:/mosquitto/config
       - ./mqtt/mosquitto/data:/mosquitto/data
       - ./mqtt/mosquitto/log:/mosquitto/log
+    networks:
+      - absortech-network
     restart: unless-stopped
 
   absortech-mqtt:
-    build: .
+    build:
+      context: ./
+      dockerfile: dockerfiles/mqtt
     container_name: absortech-mqtt
     depends_on:
       - mosquitto
     environment:
       - MQTT_HOST=mosquitto
+    networks:
+      - absortech-network
     restart: unless-stopped
 
 volumes:
