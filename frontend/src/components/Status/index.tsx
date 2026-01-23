@@ -49,7 +49,7 @@ export default function Status() {
   return (
     <div className={styles.status}>
       {leituras.map((item, index) => {
-        const quantidadeAbsorventes = item.valor_leitura;
+        const quantidadeAbsorventes = Number(item.valor_leitura);
         
         return (
           <div key={index} className={styles.container}>
